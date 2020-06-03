@@ -17,7 +17,11 @@ class PlayingCard {
         - state (set this to 0)
         */
 
-        // your code goes here (remove this comment once you have added your code)
+        this.element = element
+        this.suit = suit
+        this.face = face
+        this.img = `img/${face}_of_${suit}.png`
+        this.state = 0
 
         this.element.addEventListener('click', () => {
             /*
@@ -27,7 +31,13 @@ class PlayingCard {
             - To show the back of the card use 'img/back.png'
             */
 
-            // your code goes here (remove this comment once you have added your code)
+            if (this.state == 0) {
+                this.element.src = this.img
+                this.state = 1
+            } else if (this.state == 1) {
+                this.element.src = 'img/back.png'
+                this.state = 0
+            }
         })
     }
 
@@ -46,8 +56,9 @@ function createCardImage() {
     - Set the src property of the img to 'img/back.png'
     - return the img
     */
-
-    // your code goes here (remove this comment once you have added your code)
+    const img = document.createElement('img')
+    img.src = 'img/back.png'
+    return img
 }
 
 function displayDeck() {
@@ -56,8 +67,9 @@ function displayDeck() {
     - in the loop, append the card.element to the container
     - Use a forEach with an arrow function
     */
-
-    // your code goes here (remove this comment once you have added your code)
+    deck.forEach(card => {
+        container.appendChild(card.element)
+    })
 }
 
 function shuffleDeck() {
@@ -89,8 +101,9 @@ function buildDeck() {
             - Use the .push method to push a new PlayingCard object into the deck array
             - Do the .push and object creation in a single statement
             */
-
-            // your code goes here (remove this comment once you have added your code)
+            const image = createCardImage()
+            image.setAttribute('id', `${face}_of_${suit}.png`)
+            deck.push(new PlayingCard(image, face, suit))
         })
     })
 }
